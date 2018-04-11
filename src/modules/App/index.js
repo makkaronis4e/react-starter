@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import * as AppActions from './AppState';
-import Spinner, { Jokes } from '.';
+import { Jokes, Spinner } from '.';
 import './App.styl';
 
 class App extends PureComponent {
@@ -10,11 +10,13 @@ class App extends PureComponent {
   }
 
   render() {
+    const jokes = this.props.data;
+
     if (!this.props.isLoading) {
       return <Spinner />;
     }
 
-    return <Jokes />;
+    return <Jokes joke={jokes} />;
   }
 }
 
