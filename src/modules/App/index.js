@@ -6,6 +6,10 @@ import Jokes from './Jokes';
 import './App.styl';
 
 class App extends PureComponent {
+  componentWillMount() {
+    this.props.dispatch(AppActions.loadCategories());
+  }
+
   componentDidMount() {
     this.props.dispatch(AppActions.loadData());
   }

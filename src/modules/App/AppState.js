@@ -9,11 +9,29 @@ const initialState = {
   data: false
 };
 
+export function loadCategories() {
+  return (dispatch) => {
+    dispatch({ type: LOAD_START });
+
+    Axios.get('http://api.icndb.com/categories')
+      .then((res) => {
+        console.log('response', res);
+        // here do sth with the data
+        const data = res.data || {};
+        dispatch({ type: LOAD_SUCCESS, data });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({ type: LOAD_ERROR });
+      });
+  };
+}
+
 export function loadData() {
   return (dispatch) => {
     dispatch({ type: LOAD_START });
 
-    Axios.get('http://api.icndb.com/jokes/random/3?exclude=[nerdy,explicit]')
+    Axios.get('http://api.icndb.com/jokes/random/3')
       .then((res) => {
         console.log('response', res);
         // here do sth with the data
