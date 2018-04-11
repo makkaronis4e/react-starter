@@ -2,8 +2,10 @@ import React, { PureComponent } from 'react';
 
 class Jokes extends PureComponent {
   render() {
-    console.log(this.props);
-    return <div>hohoh</div>;
+    const jokesArr = this.props.joke.value;
+    const firstJoke = jokesArr[0].joke;
+    console.log(jokesArr);
+    return <div>{firstJoke}</div>;
   }
 }
 

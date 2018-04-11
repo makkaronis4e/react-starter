@@ -11,12 +11,11 @@ class App extends PureComponent {
   }
 
   render() {
-    const jokes = this.props.data;
-
     if (this.props.isLoading) {
       return <Spinner />;
     }
 
+    const jokes = this.props.data;
     return <Jokes joke={jokes} />;
   }
 }
