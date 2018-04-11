@@ -1,6 +1,7 @@
 import { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import * as AppActions from './AppState';
+import Spinner from './'
 import './App.styl';
 
 class App extends PureComponent {
@@ -8,8 +9,15 @@ class App extends PureComponent {
     this.props.dispatch(AppActions.loadData());
   }
 
+ 
   render() {
-    return !this.props.isLoading && 'Hello There!';
+    let jokes = this.props.data;
+
+    if (this.props.isLoading) {
+      return <Spinner /> 
+    } else { 
+      return <Jokes joke = {jokes}/>  
+    }
   }
 }
 

@@ -13,7 +13,7 @@ export function loadData() {
   return (dispatch) => {
     dispatch({ type: LOAD_START });
 
-    Axios.get('data/sample.json')
+    Axios.get('http://api.icndb.com/jokes/random/3?exclude=[nerdy,explicit]')
       .then((res) => {
         console.log('response', res);
         // here do sth with the data
