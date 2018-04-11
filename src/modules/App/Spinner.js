@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 
 class Spinner extends PureComponent {
-
-    render() {
-        return <img src='/home/mak/Desktop/react-starter/src/img' />
+  render() {
+    return <img src="../img" alt="" />;
   }
 }
 
-export default Spinner
+export default Spinner;
