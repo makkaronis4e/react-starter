@@ -1,5 +1,6 @@
 import Axios from 'axios';
 
+
 const API_BASE_URL = 'http://api.icndb.com';
 const RANDOM_JOKES_URL = `${API_BASE_URL}/jokes/random`;
 const JOKE_CATEGORIES_URL = `${API_BASE_URL}/categories`;
@@ -80,4 +81,22 @@ export default function AppReducer(state = initialState, action = {}) {
     default:
       return Object.assign({}, state);
   }
+}
+
+export function load(jokesAmount) {
+  Axios.get(`${RANDOM_JOKES_URL}/${jokesAmount}?escape=javascript`)
+    .then(res => res.data || {})
+    .then((data) => {
+      if (data.type !== 'success') {
+        throw new Error('API returned an error.');
+      }
+      return data;
+    })
+    .then(data => data.value || [])
+    .then((jokes) => {
+      console.log('jokesdd', jokes);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
