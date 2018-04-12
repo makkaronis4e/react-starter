@@ -40,7 +40,7 @@ export function loadData(jokesAmount) {
   return (dispatch) => {
     dispatch({ type: LOAD_START });
 
-    const jokee = !jokesAmount ? 1 : jokesAmount;
+    const jokee = !jokesAmount ? 10 : jokesAmount;
 
     Axios.get(`${RANDOM_JOKES_URL}/${jokee}?escape=javascript`)
       .then(res => res.data || {})
@@ -88,14 +88,16 @@ export function load(params) {
 
   let cat = '';
 
-  if (!explicit) {
-    cat = '?exclude=[explicit]';
-  } else if (!nerdy) {
+  if (!explicit && nerdy) {
     cat = '?exclude=[nerdy]';
+  } else if (!nerdy && explicit) {
+    cat = '?exclude=[explicit]';
+  } else if (nerdy && explicit) {
+    cat = '?exclude=[explicit, nerdy]';
   } else { cat = ''; }
-
+  console.log('-----', cat);
   const url = `${RANDOM_JOKES_URL}/${number}?escape=javascript${cat}`;
-  console.log('-----', url, cat, number);
+
 
   Axios.get(url)
     .then(res => res.data || {})
@@ -106,9 +108,9 @@ export function load(params) {
       return data;
     })
     .then(data => data.value || [])
-    .then((jokes) => {
-      console.log('jokesdd', jokes);
-    })
+    // .then((jokes) => {
+    //  console.log('jokesdd', jokes);
+    // })
     .catch((error) => {
       console.log(error);
     });

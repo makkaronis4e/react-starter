@@ -21,7 +21,7 @@ class App extends PureComponent {
     }
 
     return (
-      <div>
+      <div className="wrapper">
         <Jokes joke={this.props.jokes} />
         <Filters category={this.props.categories} />
       </div>
