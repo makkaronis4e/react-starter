@@ -10,10 +10,6 @@ export default class Filters extends PureComponent {
 
     return (
       <div className="options-block">
-        <div className="jokes-number">
-          Number of jokes: <input id="jokes-number" type="number" min="1" max="10" value="1" />
-          <button className="refresh">Refresh</button>
-        </div>
         <ul>
           {categoryItems}
           <button className="cat-button cat-button-nocategory">No category</button>
