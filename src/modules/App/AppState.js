@@ -3,7 +3,7 @@ import Axios from 'axios';
 const API_BASE_URL = 'http://api.icndb.com';
 const RANDOM_JOKES_URL = `${API_BASE_URL}/jokes/random`;
 const JOKE_CATEGORIES_URL = `${API_BASE_URL}/categories`;
-const DEFAULT_JOKES_AMOUNT = 1;
+const DEFAULT_JOKES_AMOUNT = 3;
 
 const LOAD_START = 'App/AppState/LOAD_START';
 const CAT_LOAD_SUCCESS = 'App/AppState/CAT_LOAD_SUCCESS';
@@ -40,7 +40,7 @@ export function loadData() {
   return (dispatch) => {
     dispatch({ type: LOAD_START });
 
-    const jokesAmount = 1 || DEFAULT_JOKES_AMOUNT;
+    const jokesAmount = 0 || DEFAULT_JOKES_AMOUNT;
     Axios.get(`${RANDOM_JOKES_URL}/${jokesAmount}?escape=javascript`)
       .then(res => res.data || {})
       .then((data) => {

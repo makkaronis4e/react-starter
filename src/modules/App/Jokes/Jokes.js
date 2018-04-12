@@ -9,7 +9,7 @@ export default class Jokes extends PureComponent {
     );
 
     return (
-      <ul>
+      <ul className="jokes-list">
         {jokeItems}
       </ul>
     );
