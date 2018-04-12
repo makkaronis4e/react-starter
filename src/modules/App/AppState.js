@@ -3,7 +3,7 @@ import Axios from 'axios';
 const API_BASE_URL = 'http://api.icndb.com';
 const RANDOM_JOKES_URL = `${API_BASE_URL}/jokes/random`;
 const JOKE_CATEGORIES_URL = `${API_BASE_URL}/categories`;
-const DEFAULT_JOKES_AMOUNT = 3;
+const DEFAULT_JOKES_AMOUNT = 10;
 
 const LOAD_START = 'App/AppState/LOAD_START';
 const CAT_LOAD_SUCCESS = 'App/AppState/CAT_LOAD_SUCCESS';

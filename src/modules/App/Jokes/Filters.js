@@ -9,10 +9,15 @@ export default class Filters extends PureComponent {
     );
 
     return (
-      <ul>
-        {categoryItems}
-        <button className="cat-button cat-button-nocategory">No category</button>
-      </ul>
+      <div className="options-block">
+        <div className="jokes-number">
+          Number of jokes: <input id="jokes-number "type="number" min="1" max="10" value="1" />
+        </div>
+        <ul>
+          {categoryItems}
+          <button className="cat-button cat-button-nocategory">No category</button>
+        </ul>
+      </div>
     );
   }
 }
