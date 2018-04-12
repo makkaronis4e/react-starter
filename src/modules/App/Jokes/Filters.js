@@ -7,17 +7,17 @@ export default class Filters extends PureComponent {
     super(props);
     this.onNumberChange = this.onNumberChange.bind(this);
     this.onSelectAll = this.onSelectAll.bind(this);
-    this.state = {
-      number: 5,
-      explicit: true,
-      nerdy: false
-    };
   }
+
+  state = {
+    number: 1,
+    explicit: true,
+    nerdy: false
+  };
 
   onNumberChange(e) {
     (this.setState(
-      { number: e.target.value },
-      AppActions.load(e.target.value)));
+      { number: e.target.value }));
   }
 
   onSelectAll() {
@@ -28,8 +28,12 @@ export default class Filters extends PureComponent {
   }
 
   render() {
+    AppActions.load(this.state);
+
     const number = this.state.number;
+
     const catArr = this.props.category;
+
     const categoryItems = catArr.map(cat =>
       <button key={cat.toString()} className="cat-button cat-button-category">{cat}</button>
     );
@@ -42,7 +46,6 @@ export default class Filters extends PureComponent {
         </div>
         <ul>
           {categoryItems}
-          <button className="cat-button cat-button-nocategory">No category</button>
           <button className="cat-button cat-button-all" onClick={this.onSelectAll}>Select All</button>
         </ul>
       </div>

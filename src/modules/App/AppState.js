@@ -4,7 +4,6 @@ import Axios from 'axios';
 const API_BASE_URL = 'http://api.icndb.com';
 const RANDOM_JOKES_URL = `${API_BASE_URL}/jokes/random`;
 const JOKE_CATEGORIES_URL = `${API_BASE_URL}/categories`;
-const DEFAULT_JOKES_AMOUNT = 1;
 
 const LOAD_START = 'App/AppState/LOAD_START';
 const CAT_LOAD_SUCCESS = 'App/AppState/CAT_LOAD_SUCCESS';
@@ -37,12 +36,13 @@ export function loadCategories() {
   };
 }
 
-export function loadData() {
+export function loadData(jokesAmount) {
   return (dispatch) => {
     dispatch({ type: LOAD_START });
 
-    const jokesAmount = 0 || DEFAULT_JOKES_AMOUNT;
-    Axios.get(`${RANDOM_JOKES_URL}/${jokesAmount}?escape=javascript`)
+    const jokee = !jokesAmount ? 1 : jokesAmount;
+
+    Axios.get(`${RANDOM_JOKES_URL}/${jokee}?escape=javascript`)
       .then(res => res.data || {})
       .then((data) => {
         if (data.type !== 'success') {
@@ -83,8 +83,21 @@ export default function AppReducer(state = initialState, action = {}) {
   }
 }
 
-export function load(jokesAmount) {
-  Axios.get(`${RANDOM_JOKES_URL}/${jokesAmount}?escape=javascript`)
+export function load(params) {
+  const { number, explicit, nerdy } = params;
+
+  let cat = '';
+
+  if (!explicit) {
+    cat = '?exclude=[explicit]';
+  } else if (!nerdy) {
+    cat = '?exclude=[nerdy]';
+  } else { cat = ''; }
+
+  const url = `${RANDOM_JOKES_URL}/${number}?escape=javascript${cat}`;
+  console.log('-----', url, cat, number);
+
+  Axios.get(url)
     .then(res => res.data || {})
     .then((data) => {
       if (data.type !== 'success') {
