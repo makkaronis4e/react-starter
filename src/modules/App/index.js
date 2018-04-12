@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import * as AppActions from './AppState';
 import Spinner from './Spinner';
-import Jokes from './Jokes';
+import Jokes from './Jokes/Jokes';
+import Filters from './Jokes/Filters';
 import './App.styl';
 
 class App extends PureComponent {
@@ -19,8 +20,12 @@ class App extends PureComponent {
       return <Spinner />;
     }
 
-    const jokes = this.props.data;
-    return <Jokes joke={jokes} />;
+    return (
+      <div>
+        <Jokes joke={this.props.jokes} />
+        <Filters category={this.props.categories} />
+      </div>
+    );
   }
 }
 
