@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as AppActions from './AppState';
 import Spinner from './Spinner';
 import Jokes from './Jokes/Jokes';
-import Filters from './Jokes/Filters';
+import { Filters } from './Jokes/Filters';
 import './App.styl';
 
 class App extends PureComponent {
@@ -30,5 +30,5 @@ class App extends PureComponent {
 }
 
 export default connect(
-  state => state.AppState
+  state => state.AppState,
 )(App);

@@ -84,34 +84,40 @@ export default function AppReducer(state = initialState, action = {}) {
 }
 
 export function load(params) {
-  const { number, explicit, nerdy } = params;
+  return (dispatch) => {
+    dispatch({ type: LOAD_START });
+    const { number, explicit, nerdy } = params;
 
-  let cat = '';
+    let cat = '';
 
-  if (!explicit && nerdy) {
-    cat = '?exclude=[nerdy]';
-  } else if (!nerdy && explicit) {
-    cat = '?exclude=[explicit]';
-  } else if (nerdy && explicit) {
-    cat = '?exclude=[explicit, nerdy]';
-  } else { cat = ''; }
-  console.log('-----', cat);
-  const url = `${RANDOM_JOKES_URL}/${number}?escape=javascript${cat}`;
+    if (!explicit && nerdy) {
+      cat = '?exclude=[nerdy]';
+    } else if (!nerdy && explicit) {
+      cat = '?exclude=[explicit]';
+    } else if (nerdy && explicit) {
+      cat = '?exclude=[explicit, nerdy]';
+    } else { cat = ''; }
 
+    console.log('-----', cat);
 
-  Axios.get(url)
-    .then(res => res.data || {})
-    .then((data) => {
-      if (data.type !== 'success') {
-        throw new Error('API returned an error.');
-      }
-      return data;
-    })
-    .then(data => data.value || [])
-    // .then((jokes) => {
-    //  console.log('jokesdd', jokes);
-    // })
-    .catch((error) => {
-      console.log(error);
-    });
+    const url = `${RANDOM_JOKES_URL}/${number}?escape=javascript${cat}`;
+
+    Axios.get(url)
+      .then(res => res.data || {})
+      .then((data) => {
+        if (data.type !== 'success') {
+          throw new Error('API returned an error.');
+        }
+        return data;
+      })
+      .then(data => data.value || [])
+      .then((jokes) => {
+        console.log('-=-=-=-=-=-=-==', jokes);
+        dispatch({ type: LOAD_SUCCESS, jokes });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({ type: LOAD_ERROR });
+      });
+  };
 }

@@ -1,27 +1,30 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import * as AppActions from '../AppState';
 import './Filters.styl';
 
-export default class Filters extends PureComponent {
+export class Filters extends PureComponent {
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.onSelectAll = this.onSelectAll.bind(this);
+    this.reload = this.reload.bind(this);
   }
 
   state = {
     number: 10,
-    explicit: true,
-    nerdy: false
+    explicit: false,
+    nerdy: false,
+    reload: false
   };
 
   onSelectAll() {
     this.setState({
-      explicit: true,
-      nerdy: true
+      explicit: false,
+      nerdy: false
     });
+
     const checkboxes = document.querySelectorAll('label > input');
-    console.log(checkboxes.length);
     checkboxes[0].checked = false;
     checkboxes[1].checked = false;
   }
@@ -36,8 +39,14 @@ export default class Filters extends PureComponent {
     });
   }
 
+  reload() {
+    this.setState({
+      reload: !this.state.reload
+    });
+  }
+
   render() {
-    AppActions.load(this.state);
+    this.props.dispatch(AppActions.load(this.state));
     console.log(this.state);
 
     const number = this.state.number;
@@ -52,7 +61,7 @@ export default class Filters extends PureComponent {
       <div className="options-block">
         <div className="jokes-number">
           Number of jokes: <input name="number" id="jokes-number" type="number" min="1" max="10" value={number} onChange={this.handleInputChange} />
-          <button className="refresh">Refresh</button>
+          <button className="refresh" onClick={this.reload}>Refresh</button>
         </div>
         <div className="options cat-button">
           {categoryItems}
@@ -63,3 +72,6 @@ export default class Filters extends PureComponent {
   }
 }
 
+export default connect(
+  state => state.AppState
+)(Filters);
