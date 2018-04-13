@@ -31,6 +31,3 @@ Builds a minified version of the application in the build folder.
 ```sh
 $ npm run build
 ```
-
-## Embed version
-Under [localhost:3000/index_iframe.html](http://localhost:3000/index_iframe.html) you will find a embed version of your for testing purposes.
