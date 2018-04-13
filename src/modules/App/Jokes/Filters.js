@@ -12,7 +12,7 @@ export class Filters extends PureComponent {
   }
 
   state = {
-    number: 10,
+    number: 1,
     explicit: false,
     nerdy: false,
     reload: false
@@ -46,7 +46,7 @@ export class Filters extends PureComponent {
   }
 
   render() {
-    this.props.dispatch(AppActions.load(this.state));
+    AppActions.load(this.state);
     console.log(this.state);
 
     const number = this.state.number;
@@ -73,5 +73,4 @@ export class Filters extends PureComponent {
 }
 
 export default connect(
-  state => state.AppState
 )(Filters);
