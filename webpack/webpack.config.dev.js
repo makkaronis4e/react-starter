@@ -17,12 +17,6 @@ module.exports = merge(common, {
       inject: true,
       template: Path.resolve(__dirname, '../src/index.html')
     }),
-    new HtmlWebpackPlugin({
-      title: 'iframe testpage',
-      inject: false,
-      filename: 'index_iframe.html',
-      template: Path.resolve(__dirname, '../src/index_iframe.html')
-    }),
     new Webpack.NamedModulesPlugin(),
     new Webpack.HotModuleReplacementPlugin()
   ],
