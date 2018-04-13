@@ -6,7 +6,7 @@ A lightweight Starterkit including [React v16.2.0](https://facebook.github.io/re
 ## Get the kit
 
 ```sh
-$ git clone git@github.com:wbkd/react-starter.git && cd react-starter
+$ git clone git@github.com:makkaronis4e/react-starter.git && cd react-starter
 ```
 
 ## Installation
@@ -34,7 +34,3 @@ $ npm run build
 
 ## Embed version
 Under [localhost:3000/index_iframe.html](http://localhost:3000/index_iframe.html) you will find a embed version of your for testing purposes.
-
-## Contribute
-
-Feel free to dive in! [Open an issue](https://github.com/wbkd/react-starter/issues/new) or submit PRs.
